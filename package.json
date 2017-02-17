@@ -1,0 +1,23 @@
+{
+  "name": "pino-caller",
+  "version": "1.0.0",
+  "description": "print the filename and line number of the caller (use only in development environment)",
+  "main": "index.js",
+  "repository": "https://github.com/phra/pino-caller.git",
+  "author": "phra <greensoncio@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/tape": "^4.2.29",
+    "pino": "^4.0.0",
+    "tape": "^4.6.3",
+    "through2": "^2.0.3",
+    "typescript": "^2.1.6"
+  },
+  "peerDependencies": {
+    "pino": "*"
+  },
+  "scripts": {
+    "pretest": "tsc -p .",
+    "test": "tape tests/**/*.js"
+  }
+}
