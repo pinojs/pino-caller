@@ -1,8 +1,9 @@
 ## pino-caller&nbsp;&nbsp;[![Coverage Status](https://coveralls.io/repos/github/phra/pino-caller/badge.svg?branch=master)](https://coveralls.io/github/phra/pino-caller?branch=master)&nbsp;[![Build Status](https://travis-ci.org/phra/pino-caller.svg?branch=master)](https://travis-ci.org/phra/pino-caller)
 
 ### Description
-`pino-caller` is a plugin for [pino](https://github.com/pinojs/pino) that let you print also the calling site of the logging functions.
-This can be useful where developing with large codebases in order to locate the exact point where pino is invoked.
+`pino-caller` is a wrapper for [pino](https://github.com/pinojs/pino) which adds the call site of each log message to the log output.
+This can be useful when developing with large codebases in order to locate the exact point where pino is invoked.
+
 **WARNING: DO NOT USE IT IN PRODUCTION ENVIRONMENT BECAUSE IT WILL KILL PINO'S AWESOME PERFORMANCE!**
 
 ### Usage
