@@ -1,9 +1,11 @@
 "use strict";
 
+const OFFSET = process && process.version[1] > 6 ? 2 : 3
+
 function _makeCallSiteGetter(pinoInstance, level) {
     return function () {
         var child = pinoInstance.child({
-            caller: Error().stack.split('\n')[2].substr(7)
+            caller: Error().stack.split('\n')[OFFSET].substr(7)
         })
 
         return child[level].apply(child, arguments)

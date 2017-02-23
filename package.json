@@ -14,6 +14,9 @@
   "peerDependencies": {
     "pino": "*"
   },
+  "engines": {
+    "node": ">4.0.0"
+  },
   "scripts": {
     "test": "tap tests/*.js",
     "coverage": "tap --cov tests/*.js"
