@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "tap tests/*.js",
-    "coverage": "tap --cov tests/*.js"
+    "coverage": "tap --cov tests/*.js",
+    "example": "env NODE_ENV=development node examples/index.js"
   }
 }
