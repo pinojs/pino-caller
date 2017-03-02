@@ -6,7 +6,16 @@
   "repository": "https://github.com/phra/pino-caller.git",
   "author": "phra <greensoncio@gmail.com>",
   "license": "MIT",
+  "watch": {
+    "test-watch": {
+      "patterns": [
+        "."
+      ],
+      "extensions": "js"
+    }
+  },
   "devDependencies": {
+    "npm-watch": "^0.1.8",
     "pino": "^4.0.0",
     "standard": "^8.6.0",
     "tap": "^10.2.1",
@@ -19,11 +28,12 @@
     "node": ">4.0.0"
   },
   "scripts": {
-    "lint": "standard index.js examples/*js tests/*.js",
-    "pretest": "npm run lint",
-    "precoverage": "npm run lint",
+    "lint-fix": "standard --fix index.js examples/*js tests/*.js",
+    "pretest": "npm run lint-fix",
     "test": "tap tests/*.js",
+    "test-watch": "tap tests/*.js",
     "coverage": "tap --cov tests/*.js",
-    "example": "env NODE_ENV=development node examples/index.js"
+    "example": "env NODE_ENV=development node examples/index.js",
+    "watch": "npm-watch"
   }
 }
