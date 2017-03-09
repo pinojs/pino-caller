@@ -1,4 +1,4 @@
-## pino-caller&nbsp;&nbsp;[![Coverage Status](https://coveralls.io/repos/github/phra/pino-caller/badge.svg?branch=master)](https://coveralls.io/github/phra/pino-caller?branch=master)&nbsp;[![Build Status](https://travis-ci.org/pinojs/pino-caller.svg?branch=master)](https://travis-ci.org/pinojs/pino-caller)
+## pino-caller&nbsp;&nbsp;[![Coverage Status](https://coveralls.io/repos/github/pinojs/pino-caller/badge.svg?branch=master)](https://coveralls.io/github/pinojs/pino-caller?branch=master)&nbsp;[![Build Status](https://travis-ci.org/pinojs/pino-caller.svg?branch=master)](https://travis-ci.org/pinojs/pino-caller)
 
 ### Description
 `pino-caller` is a wrapper for [pino](https://github.com/pinojs/pino) which adds the call site of each log message to the log output.
