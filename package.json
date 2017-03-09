@@ -1,6 +1,6 @@
 {
   "name": "pino-caller",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "print the filename and line number of the caller (use only in development environment)",
   "main": "index.js",
   "repository": "https://github.com/pinojs/pino-caller.git",
