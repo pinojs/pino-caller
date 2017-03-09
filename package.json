@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "print the filename and line number of the caller (use only in development environment)",
   "main": "index.js",
-  "repository": "https://github.com/phra/pino-caller.git",
+  "repository": "https://github.com/pinojs/pino-caller.git",
   "author": "phra <greensoncio@gmail.com>",
   "license": "MIT",
   "watch": {
