@@ -31,7 +31,7 @@ pino.error('error1')
 pino.debug('debug1')
 ```
 
-You can find also a working example in the `examples` directory and you can run by with `npm run example`
+You can find also a working example in the `examples` directory and you can run it with `npm run example`
 
 ### Example output
 
