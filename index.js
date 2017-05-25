@@ -8,14 +8,13 @@ function traceCaller (pinoInstance) {
     return name === 'asJson' ? asJson : target[name]
   }
 
-  function asJson () {
-    const args = Array.prototype.slice.call(arguments)
+  function asJson (...args) {
     args[0] = args[0] || Object.create(null)
     args[0].caller = Error().stack.split('\n')[STACKTRACE_OFFSET].substr(LINE_OFFSET)
     return pinoInstance.asJson.apply(this, args)
   }
 
-  return new Proxy(pinoInstance, { get: get })
+  return new Proxy(pinoInstance, { get })
 }
 
 module.exports = traceCaller
