@@ -1,6 +1,7 @@
 'use strict'
 
-const STACKTRACE_OFFSET = process && process.version[1] > 6 ? 4 : 5
+const NODEJS_VERSION = parseInt(process.version.slice(1).split('.')[0], 10)
+const STACKTRACE_OFFSET = NODEJS_VERSION && NODEJS_VERSION > 6 ? 4 : 5
 const LINE_OFFSET = 7
 
 function traceCaller (pinoInstance) {
