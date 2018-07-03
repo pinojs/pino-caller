@@ -4,7 +4,21 @@
 `pino-caller` is a wrapper for [pino](https://github.com/pinojs/pino) which adds the call site of each log message to the log output.
 This can be useful when developing with large codebases in order to locate the exact point where pino is invoked.
 
-**WARNING: DO NOT USE IT IN PRODUCTION ENVIRONMENT BECAUSE IT WILL KILL PINO'S AWESOME PERFORMANCE!**
+### Install
+
+For Pino v4 and below use the v2 line, which can be installed with the `@legacy` tag:
+
+```sh
+npm install pino-caller@legacy
+``` 
+
+For Pino v5 and above use the v3+ line, which will install using the usual command:
+
+```
+npm install pino-caller
+```
+
+**WARNING: THIS IS A DEVELOPMENT TOOL AVOID PRODUCTION USE!**
 
 ### Usage
 
