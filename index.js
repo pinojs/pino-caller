@@ -3,7 +3,8 @@
 const NODEJS_VERSION = parseInt(process.version.slice(1).split('.')[0], 10)
 const STACKTRACE_OFFSET = NODEJS_VERSION && NODEJS_VERSION > 6 ? 4 : 5
 const LINE_OFFSET = 7
-const { asJsonSym } = require('pino/lib/symbols')
+const { symbols } = require('pino')
+const { asJsonSym } = symbols
 
 function traceCaller (pinoInstance) {
   function get (target, name) {
