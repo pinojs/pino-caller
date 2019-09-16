@@ -35,5 +35,13 @@
     "coverage": "tap --cov tests/*.js",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.13"
+  },
+  "standard": {
+    "ignore": [
+      "examples/module-ts.js"
+    ]
   }
 }
