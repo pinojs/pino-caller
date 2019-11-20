@@ -41,7 +41,7 @@ test('pino caller works also when adding level', function (t) {
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
+    const regex = /Proxy.fatal \(\/(.)*\/pino\/lib\/levels\.js/
     t.ok(res.caller, 'caller property is set')
     t.equal(typeof res.caller, 'string', 'caller property is a string')
     t.ok(regex.test(res.caller), 'caller property matches the test regex')
