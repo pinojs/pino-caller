@@ -10,7 +10,7 @@ For Pino v4 and below use the v2 line, which can be installed with the `@legacy`
 
 ```sh
 npm install pino-caller@legacy
-``` 
+```
 
 For Pino v5 and above use the v3+ line, which will install using the usual command:
 
@@ -23,11 +23,16 @@ npm install pino-caller
 ### Usage
 
 #### Basic
+In cases where the stack trace offset are wrong, the following options are available:
+
+- `stackTraceOffset` to increase the stack trace offset. Default to 0.
+- `lineOffset` to increase the line offset. Default to 0.
+
 ```js
 'use strict'
 
 const pino = require('pino')() // it will print as usual
-const pinoCaller = require('pino-caller')(pino) // it will print also the calling site
+const pinoCaller = require('pino-caller')(pino, {stackTraceOffset: 1, lineOffset:1}) // it will print also the calling site
 
 pinoCaller.info('info1')
 pinoCaller.error('error1')
