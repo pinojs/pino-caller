@@ -37,7 +37,7 @@ pinoCaller.debug('debug1')
 #### Advanced
 ```js
 'use strict'
-// dinamically load the plugin if in development environment
+// dynamically load the plugin if in development environment
 const pino = process.env.NODE_ENV === 'development' ? require('pino-caller')(require('pino')()) : require('pino')()
 
 pino.info('info1')
