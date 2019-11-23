@@ -59,11 +59,6 @@ test('pino caller works also when switching level', function (t) {
   pinoInstance.myLevel('test')
 })
 
-test('pino caller with sourcemaps', function (t) {
-  t.plan(0)
-  require('./test-ts')
-})
-
 test('pino caller works also with pino plugins', function (t) {
   t.plan(3)
 
