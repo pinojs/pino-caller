@@ -34,7 +34,7 @@
     "pretest": "npm run lint-fix && tsc -sourcemap tests/*.ts",
     "test": "tap tests/*.js",
     "test-watch": "tap tests/*.js",
-    "coverage": "tap --cov tests/*.js",
+    "coverage": "npm run pretest && tap --cov tests/*.js",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
   },
