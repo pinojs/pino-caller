@@ -13,7 +13,7 @@ function traceCaller (pinoInstance) {
 
   function asJson (...args) {
     args[0] = args[0] || Object.create(null)
-    args[0].caller = Error().stack.split('\n').filter(s => !s.includes('node_modules/pino'))[STACKTRACE_OFFSET].substr(LINE_OFFSET)
+    args[0].caller = Error().stack.split('\n').filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET].substr(LINE_OFFSET)
     return pinoInstance[asJsonSym].apply(this, args)
   }
 
