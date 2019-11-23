@@ -19,7 +19,8 @@
     "pino": "^5.0.0",
     "standard": "^8.6.0",
     "tap": "^12.0.1",
-    "through2": "^2.0.3"
+    "through2": "^2.0.3",
+    "typescript": "^3.7.2"
   },
   "peerDependencies": {
     "pino": "*"
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "lint-fix": "standard --fix index.js examples/*js tests/*.js",
-    "pretest": "npm run lint-fix",
+    "pretest": "npm run lint-fix && tsc -sourcemap tests/*.ts",
     "test": "tap tests/*.js",
     "test-watch": "tap tests/*.js",
     "coverage": "tap --cov tests/*.js",
