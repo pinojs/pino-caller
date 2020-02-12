@@ -1,6 +1,6 @@
 {
   "name": "pino-caller",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "print the filename and line number of the caller (use only in development environment)",
   "main": "index.js",
   "repository": "https://github.com/pinojs/pino-caller.git",
@@ -11,7 +11,10 @@
       "patterns": [
         "."
       ],
-      "extensions": ["js", "ts"]
+      "extensions": [
+        "js",
+        "ts"
+      ]
     }
   },
   "devDependencies": {
