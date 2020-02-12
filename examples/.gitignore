@@ -1,0 +1,5 @@
+node_modules
+*.log
+.nyc_output
+module-ts.js
+module-ts.js.map
