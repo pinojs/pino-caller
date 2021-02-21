@@ -16,7 +16,7 @@ function traceCaller (pinoInstance, relativeTo) {
     args[0] = args[0] || Object.create(null)
     args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET].substr(LINE_OFFSET)
     if (typeof relativeTo === 'string') {
-      args[0].caller = args[0].caller.replace(relativeTo, '');
+      args[0].caller = args[0].caller.replace(relativeTo + '/', '').replace(relativeTo + '\\', '')
     }
     return pinoInstance[asJsonSym].apply(this, args)
   }
