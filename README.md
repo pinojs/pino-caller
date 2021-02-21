@@ -37,8 +37,8 @@ pinoCaller.debug('debug1')
 #### Advanced
 ```js
 'use strict'
-// dynamically load the plugin if in development environment
-const pino = process.env.NODE_ENV === 'development' ? require('pino-caller')(require('pino')()) : require('pino')()
+// dynamically load the plugin if in development environment, output paths relative to __dirname
+const pino = process.env.NODE_ENV === 'development' ? require('pino-caller')(require('pino')(), __dirname) : require('pino')()
 
 pino.info('info1')
 pino.error('error1')
@@ -57,6 +57,6 @@ You can find also a working example in the `examples` directory and you can run 
 > env NODE_ENV=development node examples/index.js
 
 {"pid":44837,"hostname":"debian","level":30,"time":1487873713227,"msg":"hello from the module!","caller":"Object.<anonymous> (/home/phra/git/pino-caller/examples/module.js:4:12)","v":1}
-{"pid":44837,"hostname":"debian","level":30,"time":1487873713230,"msg":"info1","caller":"Object.<anonymous> (/home/phra/git/pino-caller/examples/index.js:8:12)","v":1}
-{"pid":44837,"hostname":"debian","level":50,"time":1487873713230,"msg":"error1","caller":"Object.<anonymous> (/home/phra/git/pino-caller/examples/index.js:9:12)","v":1}
+{"pid":44837,"hostname":"debian","level":30,"time":1487873713230,"msg":"info1","caller":"Object.<anonymous> (index.js:8:12)","v":1}
+{"pid":44837,"hostname":"debian","level":50,"time":1487873713230,"msg":"error1","caller":"Object.<anonymous> (index.js:9:12)","v":1}
 ```
