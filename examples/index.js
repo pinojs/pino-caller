@@ -1,6 +1,6 @@
 'use strict'
 
-const pino = process.env.NODE_ENV === 'development' ? require('../')(require('pino')(), __dirname) : require('pino')()
+const pino = process.env.NODE_ENV === 'development' ? require('../')(require('pino')(), { relativeTo: __dirname }) : require('pino')()
 
 require('./module')
 

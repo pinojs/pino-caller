@@ -38,7 +38,7 @@ pinoCaller.debug('debug1')
 ```js
 'use strict'
 // dynamically load the plugin if in development environment, output paths relative to __dirname
-const pino = process.env.NODE_ENV === 'development' ? require('pino-caller')(require('pino')(), __dirname) : require('pino')()
+const pino = process.env.NODE_ENV === 'development' ? require('pino-caller')(require('pino')(), { relativeTo: __dirname }) : require('pino')()
 
 pino.info('info1')
 pino.error('error1')

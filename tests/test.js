@@ -88,7 +88,7 @@ test('pino caller works also with relativeTo parameter set', function (t) {
     t.ok(res.caller, 'caller property is set')
     t.equal(typeof res.caller, 'string', 'caller property is a string')
     t.ok(regex.test(res.caller), 'caller property matches the test regex')
-  })), __dirname)
+  })), { relativeTo: __dirname })
 
   pinoInstance.info('test')
 })
