@@ -37,7 +37,7 @@
     "pretest": "npm run lint-fix",
     "test": "tap tests/*.js",
     "test-watch": "tap tests/*.js tests/*.ts",
-    "coverage": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" --cov tests/*.js tests/*.ts",
+    "test:ci": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" tests/*.js tests/*.ts --coverage-report=lcovonly",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
   },
