@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "npm-watch": "^0.1.8",
-    "pino": "^5.0.0",
+    "pino": "^6.11.3",
     "pino-debug": "^1.3.0",
     "standard": "^8.6.0",
     "tap": "^12.0.1",
