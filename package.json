@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "@types/pino": "^6.3.11",
+    "@types/tap": "^15.0.5",
+    "@types/through2": "^2.0.36",
     "npm-watch": "^0.11.0",
     "pino": "^6.11.3",
     "pino-debug": "^2.0.0",
