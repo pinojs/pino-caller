@@ -19,13 +19,15 @@
     }
   },
   "devDependencies": {
+    "@types/pino": "^6.3.11",
     "npm-watch": "^0.11.0",
     "pino": "^6.11.3",
     "pino-debug": "^2.0.0",
     "standard": "^8.6.0",
     "tap": "^12.0.1",
     "through2": "^4.0.2",
-    "typescript": "^4.2.4"
+    "tsd": "^0.17.0",
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "pino": "*"
@@ -36,9 +38,10 @@
   "scripts": {
     "lint-fix": "standard --fix index.js examples/*js tests/*.js",
     "pretest": "npm run lint-fix",
-    "test": "tap tests/*.js",
+    "test": "tap tests/*.js && npm run test-types",
     "test-watch": "tap tests/*.js tests/*.ts",
-    "test:ci": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" tests/*.js tests/*.ts --coverage-report=lcovonly",
+    "test:ci": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" tests/*.js tests/*.ts --coverage-report=lcovonly && npm run test-types",
+    "test-types": "tsc && tsd",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
   },
