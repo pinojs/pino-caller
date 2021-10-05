@@ -3,12 +3,13 @@
 // Definitions by: Austin Ziegler <https://github.com/halostatue>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-import Pino = require('pino');
-
-export = Caller;
+import { Logger } from 'pino';
 
 interface Options {
     relativeTo?: string;
 }
 
-declare function Caller(logger: Pino.Logger, options?: Options): Pino.Logger;
+declare function pinoCaller(logger: Logger, options?: Options): Logger;
+
+export default pinoCaller
+export { pinoCaller }
