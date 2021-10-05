@@ -1,7 +1,7 @@
 import tap = require('tap')
 import pino = require('pino')
-import through2 = require('through2')
-import pinoCaller = require('../')
+import * as through2 from 'through2'
+import pinoCaller from '../'
 
 tap.test('pino caller works with sourcemaps (typescript)', function (t) {
   t.plan(3)

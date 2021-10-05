@@ -24,4 +24,16 @@ function traceCaller (pinoInstance, options = {relativeTo: null}) {
   return new Proxy(pinoInstance, { get })
 }
 
+/**
+ * These export configurations enable JS and TS developers
+ * to consumer pino-caller in whatever way best suits their needs.
+ * Some examples of supported import syntax includes:
+ * - `const pinoCaller = require('pino-caller')`
+ * - `const { pinoCaller } = require('pino-caller')`
+ * - `import * as pinoCaller from 'pino-caller'`
+ * - `import { pinoCaller } from 'pino-caller'`
+ * - `import pinoCaller from 'pino-caller'`
+ */
+traceCaller.pinoCaller = traceCaller
+traceCaller.default = traceCaller
 module.exports = traceCaller
