@@ -29,6 +29,7 @@
     "tap": "^12.0.1",
     "through2": "^4.0.2",
     "tsd": "^0.17.0",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "peerDependencies": {
@@ -40,7 +41,8 @@
   "scripts": {
     "lint-fix": "standard --fix index.js examples/*js tests/*.js",
     "pretest": "npm run lint-fix",
-    "test": "tap tests/*.js && npm run test-types",
+    "test": "tap tests/*.js && npm run test-ts && npm run test-types",
+    "test-ts": "ts-node tests/test-ts.ts",
     "test-watch": "tap tests/*.js tests/*.ts",
     "test:ci": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" tests/*.js tests/*.ts --coverage-report=lcovonly && npm run test-types",
     "test-types": "tsc && tsd",
