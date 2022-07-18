@@ -23,7 +23,7 @@
     "@types/tap": "^15.0.5",
     "@types/through2": "^2.0.36",
     "npm-watch": "^0.11.0",
-    "pino": "^6.11.3",
+    "pino": "^8.2.0",
     "pino-debug": "^2.0.0",
     "standard": "^8.6.0",
     "tap": "^12.0.1",
