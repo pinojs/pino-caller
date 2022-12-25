@@ -16,7 +16,12 @@ function traceCaller (pinoInstance, options = {relativeTo: null}) {
     args[0] = args[0] || Object.create(null)
     args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET].substr(LINE_OFFSET)
     if (options && typeof options.relativeTo === 'string') {
-      args[0].caller = args[0].caller.replace(options.relativeTo + '/', '').replace(options.relativeTo + '\\', '')
+      const lastChar = options.relativeTo[options.relativeTo.length - 1]
+      const hasTrailingSlash = lastChar === '/' || lastChar === '\\'
+
+      args[0].caller = args[0].caller
+        .replace(hasTrailingSlash ? options.relativeTo : options.relativeTo + '/', '')
+        .replace(hasTrailingSlash ? options.relativeTo : options.relativeTo + '\\', '')
     }
     return pinoInstance[asJsonSym].apply(this, args)
   }
