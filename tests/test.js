@@ -1,5 +1,6 @@
 'use strict'
 
+var path = require('path')
 var test = require('tap').test
 var pino = require('pino')
 var pinoDebug = require('pino-debug')
@@ -89,6 +90,20 @@ test('pino caller works also with relativeTo parameter set', function (t) {
     t.equal(typeof res.caller, 'string', 'caller property is a string')
     t.ok(regex.test(res.caller), 'caller property matches the test regex')
   })), { relativeTo: __dirname })
+
+  pinoInstance.info('test')
+})
+
+test('pino caller works also when relativeTo has a trailing slash', function (t) {
+  t.plan(3)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    const regex = /Test.<anonymous> \(test.js/
+    t.ok(res.caller, 'caller property is set')
+    t.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+  })), { relativeTo: path.join(__dirname, '/') })
 
   pinoInstance.info('test')
 })
