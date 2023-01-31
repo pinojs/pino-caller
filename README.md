@@ -1,6 +1,6 @@
 ## pino-caller
 [![npm version](https://img.shields.io/npm/v/pino-caller)](https://www.npmjs.com/package/pino-caller)
-[![Build Status](https://img.shields.io/github/workflow/status/pinojs/pino-caller/CI)](https://github.com/pinojs/pino-caller/actions)
+![Build Status](https://github.com/pinojs/pino-caller/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/pinojs/pino-caller/badge.svg?branch=master)](https://coveralls.io/github/pinojs/pino-caller?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
