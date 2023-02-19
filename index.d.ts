@@ -7,6 +7,7 @@ import { Logger } from 'pino';
 
 interface Options {
     relativeTo?: string;
+    stackAdjustment?: number;
 }
 
 declare function pinoCaller(logger: Logger, options?: Options): Logger;
