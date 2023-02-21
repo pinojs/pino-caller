@@ -51,6 +51,24 @@ pino.debug('debug1')
 
 You can find also a working example in the `examples` directory and you can run it with `npm run example`
 
+##### Options
+
+- **relativeTo** - Remove path prefixes from log messages to make them easier to read.
+- **stackAdjustment** - For those of who who've wrapped pino, make pino-caller move N stackframes up to get a meaningful message.
+
+```js
+'use strict'
+const pino = require('pino')()
+const pinoCaller = require('pino-caller')(pino, { relativeTo: __dirname, stackAdjustment: 1 })
+
+// People who have wrapped pino like in the contrived example below 
+// will want to use stackAdjustment.
+// Most people will NOT need this.  See issue #90 for details.
+const log = {
+  info: function(message) { pinoCaller.info(message) }
+}
+```
+
 ### Example output
 
 ```

@@ -7,14 +7,16 @@ const LINE_OFFSET = 7
 const { symbols } = require('pino')
 const { asJsonSym } = symbols
 
-function traceCaller (pinoInstance, options = {relativeTo: null}) {
+function traceCaller (pinoInstance, options = {relativeTo: null, stackAdjustment: 0}) {
+  const adjustment = options.stackAdjustment || 0
+
   function get (target, name) {
     return name === asJsonSym ? asJson : target[name]
   }
 
   function asJson (...args) {
     args[0] = args[0] || Object.create(null)
-    args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET].substr(LINE_OFFSET)
+    args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET + adjustment].substr(LINE_OFFSET)
     if (options && typeof options.relativeTo === 'string') {
       const lastChar = options.relativeTo[options.relativeTo.length - 1]
       const hasTrailingSlash = lastChar === '/' || lastChar === '\\'
