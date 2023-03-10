@@ -54,7 +54,7 @@ You can find also a working example in the `examples` directory and you can run 
 ##### Options
 
 - **relativeTo** - Remove path prefixes from log messages to make them easier to read.
-- **stackAdjustment** - For those of who who've wrapped pino, make pino-caller move N stackframes up to get a meaningful message.
+- **stackAdjustment** - For those who've wrapped pino, make pino-caller move N stackframes up to get a meaningful message.
 
 ```js
 'use strict'
