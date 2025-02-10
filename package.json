@@ -30,7 +30,7 @@
     "through2": "^4.0.2",
     "tsd": "^0.28.0",
     "ts-node": "^10.2.1",
-    "typescript": "~5.0.2"
+    "typescript": "~5.7.3"
   },
   "peerDependencies": {
     "pino": "*"
