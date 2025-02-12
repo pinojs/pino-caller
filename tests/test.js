@@ -1,21 +1,21 @@
 'use strict'
 
-var path = require('path')
-var test = require('tap').test
-var pino = require('pino')
-var pinoDebug = require('pino-debug')
-var through2 = require('through2')
-var pinoCaller = require('../')
+const path = require('node:path')
+const { test } = require('node:test')
+const pino = require('pino')
+const pinoDebug = require('pino-debug')
+const through2 = require('through2')
+const pinoCaller = require('../')
 
 test('pino caller works', function (t) {
   t.plan(3)
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(\/(.)*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })))
 
   pinoInstance.info('test')
@@ -26,10 +26,10 @@ test('pino caller works also when adding level', function (t) {
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(\/(.)*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })))
 
   pinoInstance.level = 'fatal'
@@ -48,10 +48,10 @@ test('pino caller works also when switching level', function (t) {
     }
   }, through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(\/(.)*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })))
   pinoInstance.level = 'myLevel'
   pinoInstance.level = 'trace'
@@ -69,10 +69,10 @@ test('pino caller works also with pino plugins', function (t) {
     }
   }, through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(\/(.)*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })))
 
   pinoDebug(pinoInstance, { map: { '*': 'trace' } })
@@ -85,10 +85,10 @@ test('pino caller works also with relativeTo parameter set', function (t) {
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })), { relativeTo: __dirname })
 
   pinoInstance.info('test')
@@ -99,29 +99,29 @@ test('pino caller works also when relativeTo has a trailing slash', function (t)
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })), { relativeTo: path.join(__dirname, '/') })
 
   pinoInstance.info('test')
 })
 
-test('pino caller can make stack adjustments', function(t) {
+test('pino caller can make stack adjustments', function (t) {
   t.plan(3)
 
   const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
     const res = JSON.parse(chunk.toString('utf8'))
-    const regex = /Test.<anonymous> \(\/(.)*tests\/test.js/
-    t.ok(res.caller, 'caller property is set')
-    t.equal(typeof res.caller, 'string', 'caller property is a string')
-    t.ok(regex.test(res.caller), 'caller property matches the test regex')
+    const regex = /TestContext.<anonymous> \(\/(.)*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
   })), { stackAdjustment: 1 })
 
   // Create a wrapper around pino so that we can show that stackAdjustment can bypass this stack frame.
   const log = {
-    info: function(message) {
+    info: function (message) {
       pinoInstance.info(message)
     }
   }
