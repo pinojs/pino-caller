@@ -1,6 +1,6 @@
 {
   "name": "pino-caller",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "description": "print the filename and line number of the caller (use only in development environment)",
   "main": "index.js",
   "types": "index.d.ts",
