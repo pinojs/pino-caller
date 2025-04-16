@@ -38,8 +38,7 @@
     "pretest": "npm run lint-fix",
     "test": "node --test ./tests/test.js && npm run test-ts && npm run test-types",
     "test-ts": "ts-node tests/test-ts.ts",
-    "test-watch": "tap tests/*.js tests/*.ts",
-    "test:ci": "npm run pretest && tap --node-arg=\"-r\" --node-arg=\"source-map-support/register\" tests/*.js tests/*.ts --coverage-report=lcovonly && npm run test-types",
+    "test:ci": "npm run pretest && node -r \"source-map-support/register\" tests/*.js tests/*.ts && npm run test-types",
     "test-types": "tsc && tsd",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
