@@ -27,7 +27,7 @@
     "standard": "^8.6.0",
     "through2": "^4.0.2",
     "ts-node": "^10.2.1",
-    "tsd": "^0.32.0",
+    "tsd": "^0.33.0",
     "typescript": "~5.9.2"
   },
   "engines": {
