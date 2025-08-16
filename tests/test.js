@@ -127,3 +127,19 @@ test('pino caller can make stack adjustments', function (t) {
   }
   log.info('test')
 })
+
+test('pino caller stack trace line number maps correctly', function (t) {
+  t.plan(4)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    const regex = /TestContext.<anonymous> \(\/(?:.)*tests\/test.js:(\d+)/
+    const matches = regex.exec(res.caller || '')
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(matches, 'caller property matches the test regex')
+    t.assert.ok(parseInt(matches[1], 10) > 1, 'line number in stack trace is greater than 1')
+  })))
+
+  pinoInstance.fatal('test')
+})
