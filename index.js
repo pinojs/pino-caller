@@ -1,6 +1,5 @@
 'use strict'
 
-require('source-map-support/register')
 const NODEJS_VERSION = parseInt(process.version.slice(1).split('.')[0], 10)
 const STACKTRACE_OFFSET = NODEJS_VERSION && NODEJS_VERSION > 6 ? 0 : 1
 const LINE_OFFSET = 7

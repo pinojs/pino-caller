@@ -31,20 +31,17 @@
     "typescript": "~5.9.2"
   },
   "engines": {
-    "node": ">6.0.0"
+    "node": ">=12.12.0"
   },
   "scripts": {
     "lint-fix": "standard --fix index.js examples/*js tests/*.js",
     "pretest": "npm run lint-fix",
     "test": "node --test ./tests/test.js && npm run test-ts && npm run test-types",
     "test-ts": "ts-node tests/test-ts.ts",
-    "test:ci": "npm run pretest && node -r \"source-map-support/register\" tests/*.js tests/*.ts && npm run test-types",
+    "test:ci": "npm run pretest && node --enable-source-maps tests/*.js tests/*.ts && npm run test-types",
     "test-types": "tsc && tsd",
     "example": "env NODE_ENV=development node examples/index.js",
     "watch": "npm-watch"
-  },
-  "dependencies": {
-    "source-map-support": "^0.5.13"
   },
   "standard": {
     "ignore": [
