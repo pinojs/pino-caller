@@ -7,7 +7,7 @@ const LINE_OFFSET = 7
 const { symbols } = require('pino')
 const { asJsonSym } = symbols
 
-function traceCaller (pinoInstance, options = {relativeTo: null, stackAdjustment: 0}) {
+function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustment: 0 }) {
   const adjustment = options.stackAdjustment || 0
 
   function get (target, name) {
