@@ -127,3 +127,33 @@ test('pino caller can make stack adjustments', function (t) {
   }
   log.info('test')
 })
+
+test('pino caller works with formatCaller option', function (t) {
+  t.plan(2)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    t.assert.ok(res.caller.startsWith('at '), 'caller starts with custom prefix')
+    t.assert.ok(!res.caller.includes('('), 'parentheses are stripped by formatCaller')
+  })), {
+    formatCaller: (caller) => {
+      const match = caller.match(/\((.+)\)/)
+      return match ? 'at ' + match[1] : 'at ' + caller
+    }
+  })
+
+  pinoInstance.info('test')
+})
+
+test('pino caller works with callerKey option', function (t) {
+  t.plan(3)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    t.assert.ok(res.source, 'custom callerKey property is set')
+    t.assert.equal(typeof res.source, 'string', 'custom callerKey property is a string')
+    t.assert.equal(res.caller, undefined, 'default caller property is not set')
+  })), { callerKey: 'source' })
+
+  pinoInstance.info('test')
+})

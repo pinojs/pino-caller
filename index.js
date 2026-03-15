@@ -9,6 +9,8 @@ const { asJsonSym } = symbols
 
 function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustment: 0 }) {
   const adjustment = options.stackAdjustment || 0
+  const formatCaller = typeof options.formatCaller === 'function' ? options.formatCaller : null
+  const callerKey = options.callerKey || 'caller'
 
   function get (target, name) {
     return name === asJsonSym ? asJson : target[name]
@@ -16,14 +18,17 @@ function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustmen
 
   function asJson (...args) {
     args[0] = args[0] || Object.create(null)
-    args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET + adjustment].substr(LINE_OFFSET)
+    args[0][callerKey] = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET + adjustment].substr(LINE_OFFSET)
     if (options && typeof options.relativeTo === 'string') {
       const lastChar = options.relativeTo[options.relativeTo.length - 1]
       const hasTrailingSlash = lastChar === '/' || lastChar === '\\'
 
-      args[0].caller = args[0].caller
+      args[0][callerKey] = args[0][callerKey]
         .replace(hasTrailingSlash ? options.relativeTo : options.relativeTo + '/', '')
         .replace(hasTrailingSlash ? options.relativeTo : options.relativeTo + '\\', '')
+    }
+    if (formatCaller) {
+      args[0][callerKey] = formatCaller(args[0][callerKey])
     }
     return pinoInstance[asJsonSym].apply(this, args)
   }
