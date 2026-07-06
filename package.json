@@ -27,7 +27,7 @@
     "npm-watch": "^0.11.0",
     "pino": "^10.0.0",
     "pino-debug": "^4.0.1",
-    "through2": "^4.0.2",
+    "through2": "^5.0.5",
     "ts-node": "^10.2.1",
     "tsd": "^0.33.0",
     "typescript": "~6.0.2"
