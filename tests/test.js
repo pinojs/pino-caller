@@ -127,3 +127,18 @@ test('pino caller can make stack adjustments', function (t) {
   }
   log.info('test')
 })
+
+test('pino caller works also when called from evaluated code', function (t) {
+  t.plan(3)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    const regex = /^eval \(eval at .*tests\/test.js/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
+  })))
+
+  // eslint-disable-next-line no-new-func
+  new Function('log', 'log.info("test")')(pinoInstance)
+})

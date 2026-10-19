@@ -1,11 +1,45 @@
 'use strict'
 
 require('source-map-support/register')
+const { wrapCallSite } = require('source-map-support')
 const NODEJS_VERSION = parseInt(process.version.slice(1).split('.')[0], 10)
 const STACKTRACE_OFFSET = NODEJS_VERSION && NODEJS_VERSION > 6 ? 0 : 1
-const LINE_OFFSET = 7
 const { symbols } = require('pino')
 const { asJsonSym } = symbols
+
+function returnCallSites (_, callSites) {
+  return callSites
+}
+
+// `stack` is computed on first read, so it must be read before restoring
+function captureCallSites (belowFunction) {
+  const originalPrepareStackTrace = Error.prepareStackTrace
+  const holder = {}
+  try {
+    Error.prepareStackTrace = returnCallSites
+    Error.captureStackTrace(holder, belowFunction)
+    return holder.stack
+  } finally {
+    Error.prepareStackTrace = originalPrepareStackTrace
+  }
+}
+
+function isPinoFrame (callSite) {
+  const fileName = callSite.getFileName() || ''
+  return fileName.includes('node_modules/pino') || fileName.includes('node_modules\\pino')
+}
+
+// Formats one frame the way a source-mapped stack would. source-map-support
+// names a mapped function from the position of the frame that called it, so
+// that neighbouring frame is mapped first.
+function formatCallSite (callSites, index) {
+  const sourceMapState = { nextPosition: null, curPosition: null }
+  if (index + 1 < callSites.length) {
+    wrapCallSite(callSites[index + 1], sourceMapState)
+    sourceMapState.nextPosition = sourceMapState.curPosition
+  }
+  return String(wrapCallSite(callSites[index], sourceMapState))
+}
 
 function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustment: 0 }) {
   const adjustment = options.stackAdjustment || 0
@@ -16,7 +50,10 @@ function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustmen
 
   function asJson (...args) {
     args[0] = args[0] || Object.create(null)
-    args[0].caller = Error().stack.split('\n').slice(2).filter(s => !s.includes('node_modules/pino') && !s.includes('node_modules\\pino'))[STACKTRACE_OFFSET + adjustment].substr(LINE_OFFSET)
+    // Reading call sites skips formatting every frame just to keep one of them
+    const callSites = captureCallSites(asJson)
+    const caller = callSites.filter(callSite => !isPinoFrame(callSite))[STACKTRACE_OFFSET + adjustment]
+    args[0].caller = formatCallSite(callSites, callSites.indexOf(caller))
     if (options && typeof options.relativeTo === 'string') {
       const lastChar = options.relativeTo[options.relativeTo.length - 1]
       const hasTrailingSlash = lastChar === '/' || lastChar === '\\'
