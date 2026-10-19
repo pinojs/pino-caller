@@ -6,6 +6,7 @@ const pino = require('pino')
 const pinoDebug = require('pino-debug')
 const through2 = require('through2')
 const pinoCaller = require('../')
+const { logFromTypeScript } = require('./fixtures/source-mapped')
 
 test('pino caller works', function (t) {
   t.plan(3)
@@ -141,4 +142,28 @@ test('pino caller works also when called from evaluated code', function (t) {
 
   // eslint-disable-next-line no-new-func
   new Function('log', 'log.info("test")')(pinoInstance)
+})
+
+test('pino caller works also with sourcemaps', function (t) {
+  t.plan(3)
+
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {
+    const res = JSON.parse(chunk.toString('utf8'))
+    const regex = /logFromTypeScript \(\/(.)*tests\/fixtures\/source-mapped.ts:9:/
+    t.assert.ok(res.caller, 'caller property is set')
+    t.assert.equal(typeof res.caller, 'string', 'caller property is a string')
+    t.assert.ok(regex.test(res.caller), 'caller property matches the test regex')
+  })))
+
+  logFromTypeScript(pinoInstance)
+})
+
+test('pino caller restores Error.prepareStackTrace', function (t) {
+  t.plan(1)
+
+  const prepareStackTrace = Error.prepareStackTrace
+  const pinoInstance = pinoCaller(pino(through2(function (chunk, enc, callback) {})))
+
+  pinoInstance.info('test')
+  t.assert.equal(Error.prepareStackTrace, prepareStackTrace, 'Error.prepareStackTrace is restored')
 })
