@@ -29,9 +29,7 @@ function isPinoFrame (callSite) {
   return fileName.includes('node_modules/pino') || fileName.includes('node_modules\\pino')
 }
 
-// Formats one frame the way a source-mapped stack would. source-map-support
-// names a mapped function from the position of the frame that called it, so
-// that neighbouring frame is mapped first.
+// source-map-support names a mapped function from the position of its calling frame
 function formatCallSite (callSites, index) {
   const sourceMapState = { nextPosition: null, curPosition: null }
   if (index + 1 < callSites.length) {
@@ -50,7 +48,6 @@ function traceCaller (pinoInstance, options = { relativeTo: null, stackAdjustmen
 
   function asJson (...args) {
     args[0] = args[0] || Object.create(null)
-    // Reading call sites skips formatting every frame just to keep one of them
     const callSites = captureCallSites(asJson)
     const caller = callSites.filter(callSite => !isPinoFrame(callSite))[STACKTRACE_OFFSET + adjustment]
     args[0].caller = formatCallSite(callSites, callSites.indexOf(caller))
